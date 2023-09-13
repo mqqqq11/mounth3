@@ -3,15 +3,15 @@ gmailInput = document.querySelector('#gmail_input');
 gmailButton = document.querySelector('#gmail_button');
 gmailResult = document.querySelector('#gmail_result');
 
-const regEmRightp = /^[a-zA-Z0-9_]+@gmail\.com$/
+const regExp = /^[a-zA-Z0-9_]+@gmail\.com$/
 
 
 gmailButton.onclick = () => {
-    if (regEmRightp.test(gmailInput.value)) {
-        gmailResult.temRighttContent = 'OK'
+    if (regExp.test(gmailInput.value)) {
+        gmailResult.textContent = 'OK'
         gmailResult.style.color = 'green'
     }else {
-        gmailResult.temRighttContent = 'NOT OK'
+        gmailResult.textContent = 'NOT OK'
         gmailResult.style.color = 'red'
     }
 }

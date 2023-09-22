@@ -38,4 +38,27 @@ function openModalOnScroll() {
     }
 }
 window.addEventListener('scroll', openModalOnScroll);
- 
+
+//POST MODAL
+
+const form = document.querySelector('form')
+
+const postData = (formElement) => {
+    formElement.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const request = new XMLHttpRequest()
+        request.open('POST', '/server.php')
+        request.setRequestHeader('Content-Type', 'application/json')
+
+        const formData = new FormData (formElement)
+        const obj = {}
+        formData.forEach((item, index) => {
+            obj[index] = item
+        })
+
+        const json = JSON.stringify(obj)
+
+        request.send(json)
+    })
+}

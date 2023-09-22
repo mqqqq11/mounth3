@@ -63,3 +63,56 @@ const autoShow = (indexElement = 0) => {
 }
 autoShow()
 
+const som = document.querySelector('#som')
+const usd = document.querySelector('#usd')
+const eur = document.querySelector('#eur')
+
+// som.addEventListener('input', () => {
+//     const request = new XMLHttpRequest
+//     request.open ('GET', '/data/conventor.json')
+//     request.setRequestHeader('Content-type', 'application/json')
+//     request.send()
+
+//     request.addEventListener('load', () => {
+//         const response = JSON.parse(request.response)
+//         usd.value = (som.value / response.usd).toFixed(2)
+//     })
+// } )
+
+//принцип DRY - don't reapeat yourself
+//kiss - keep it simple, stupid
+//kiss - keep it short and simple
+
+const convert = (element, target, target2, isValuta) => {
+    element.oninput = () => {
+    const request = new XMLHttpRequest
+    request.open ('GET', '/data/conventor.json')
+    request.setRequestHeader('Content-type', 'application/json')
+    request.send()
+
+
+    
+        request.onload = () => {
+            const response = JSON.parse(request.response)
+            if (isValuta === 'som') {
+                target.value = (element.value / response.usd).toFixed(2)
+                target2.value = (element.value / response.eur).toFixed(2)
+            }else if (isValuta === 'usd') {
+                target.value = (element.value * response.usd).toFixed(2)
+                target2.value = (target.value / response.eur).toFixed(2)
+            }else if (isValuta === 'eur') {
+                target2.value = (element.value * (response.eur / response.usd)).toFixed(2)
+                target.value = (element.value * response.eur).toFixed(2)
+            }
+            // element.value === "" ? target.value = "" : null
+            if (element.value === "") {
+                target.value = ''
+                target2.value = ''
+            } 
+        }
+    }
+}
+
+convert(som, usd, eur, 'som')
+convert(usd, som, eur, 'usd')
+convert(eur, som, usd, 'eur')

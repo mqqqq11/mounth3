@@ -1,0 +1,47 @@
+.main {
+    padding-top: 100px;
+}
+.card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.person-card {
+    padding: 20px;
+    margin: 10px;
+    background-color: rgba(99, 28, 107, 0.181);
+    width: 350px;
+    display: flex;
+    justify-content: end;
+    border: 1px solid #b712c3;
+}
+
+.wrapper {
+    background-color: black;
+}
+
+.person-card p {
+    color: rgba(177, 81, 127, 0.366);
+    padding-top: 15px;
+    text-align: center;
+}
+
+.icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.person-card h4 {
+    font-size: 18px;
+    margin-bottom: 5px;
+    color: rgb(101, 29, 127);
+    padding-top: 20px;
+    text-align: center;
+}
+img {
+    height: 150px;
+    width: 150px;
+    display: flex;
+}

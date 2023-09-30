@@ -125,18 +125,23 @@ const btnNext = document.querySelector('#btn-next')
 const btnPrev = document.querySelector('#btn-prev')
 let count = 1
 
-function showCard() {
-    fetch(`https://jsonplaceholder.typicode.com/todos/${count}`)
-    .then(response => response.json())
-    .then(data => {
+
+const showCard = async () => {
+    try {
+        const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${count}`)
+        const data = await response.json()
+
         card.innerHTML = `
         <p>${data.title}</p>
         <p style = "color: ${data.completed ? "green" : "red"}">${data.completed}</p>
         <p>${data.id}</p>
         `
-    })
+    }catch (error) {
+        console.error('Error');
+    }
 }
 showCard()
+
 
 btnNext.onclick = () => {
     if (count === 200) {
@@ -153,6 +158,45 @@ btnPrev.onclick = () => {
 }
 
 //fetch console.log
-fetch('https://jsonplaceholder.typicode.com/posts')
-    .then( response => response.json())
-    .then(data => console.log(data))
+const fetchLog = async () => {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts`)
+    const data = await response.json()
+    console.log(data)
+  }
+  fetchLog()
+
+
+//WEATHER
+const cityName = document.querySelector('.cityName')
+// const btnSearch = document.querySelector('#btn-search')
+const city = document.querySelector('.city')
+const temp = document.querySelector('.temp')
+
+//API HELPERS
+const DEFAULT_URL = 'http://api.openweathermap.org/data/2.5/weather'
+const API_KEY = 'e417df62e04d3b1b111abeab19cea714'
+
+//optinal chaining - ?
+
+// cityName.oninput = (event) => {
+//     fetch(`${DEFAULT_URL}?q=${event.target.value}&appid=${API_KEY}`)
+//     .then(response => response.json())
+//     .then(data => {
+//         city.innerHTML = data?.name ? data?.name : "город не найден..."
+//         temp.innerHTML = data?.main?.temp ? Math.round(data?.main?.temp - 273) + '&deg;C' : '...'
+//     })
+// }
+
+// ?q= - query пареметр
+
+cityName.oninput = async (event)=> {
+    try{
+        const response = await fetch(`${DEFAULT_URL}?q=${event.target.value}&appid=${API_KEY}`)
+        const data = await response.json()
+
+        city.innerHTML = data?.name ? data?.name : 'город не найден'
+        temp.innerHTML = data?.main?.temp ? Math.round(data?.main?.temp - 273) + '&deg;C' : '...'
+    } catch (error) {
+        console.error('Error');
+    }
+}

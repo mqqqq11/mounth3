@@ -3,11 +3,11 @@ gmailInput = document.querySelector('#gmail_input');
 gmailButton = document.querySelector('#gmail_button');
 gmailResult = document.querySelector('#gmail_result');
 
-const regExp = /^[a-zA-Z0-9_]+@gmail\.com$/
+const reg = /^[a-zA-Z0-9_]+@gmail\.com$/
 
 
 gmailButton.onclick = () => {
-    if (regExp.test(gmailInput.value)) {
+    if (reg.test(gmailInput.value)) {
         gmailResult.textContent = 'OK'
         gmailResult.style.color = 'green'
     }else {
@@ -49,7 +49,7 @@ const moveBlock = () => {
         childBlock.style.top = "0px"
     }
 
-    setTimeout(moveBlock, 1)
+    setTimeout(moveBlock, 0.1)
 }
 moveBlock();
 

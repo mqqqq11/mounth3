@@ -19,3 +19,26 @@ const fetchPersons = async ()=>{
             })
 }
 fetchPersons()
+//pilot
+
+const pilotBtn = document.querySelector('#pilot-btn')
+const pilotBtnClose = document.querySelector('#pilot-btn-close')
+const pilot = document.querySelector('.pilot')
+
+const closePilot = () => {
+    pilot.style.display = 'none'
+    document.body.style.overflow = ''
+}
+closePilot()
+
+const openPilot = () => {
+    pilot.style.display = 'flex'
+    document.body.style.overflow = "hidden"
+}
+
+setTimeout(() => {
+    openPilot()
+}, 3000)
+
+
+pilotBtnClose.onclick = () => closePilot()
